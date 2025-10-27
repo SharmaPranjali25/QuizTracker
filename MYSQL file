@@ -1,0 +1,143 @@
+create database QuizDB;
+
+use QuizDB;
+
+
+create table admin(id int PRIMARY KEY, username varchar(50), password varchar(50));
+
+insert into admin values(1,'admin@gmail.com','admin@123');
+
+select * from admin;
+
+drop table admin;
+
+select * from admin;
+
+CREATE TABLE admin (
+
+    id INT PRIMARY KEY AUTO_INCREMENT,
+
+    username VARCHAR(50) UNIQUE NOT NULL,
+
+    password VARCHAR(50) NOT NULL
+
+);
+
+INSERT INTO admin (username, password) VALUES ('admin1', 'admin1p123');
+
+INSERT INTO admin (username, password) VALUES ('admin2', 'admin2p123');
+
+INSERT INTO admin (username, password) VALUES ('admin3', 'admin3p123');
+
+INSERT INTO admin (username, password) VALUES ('admin4', 'admin4p123');
+
+INSERT INTO admin (username, password) VALUES ('admin5', 'admin5p123');
+ 
+select * from admin;
+ 
+CREATE TABLE question (
+
+id INT PRIMARY KEY AUTO_INCREMENT,
+
+category varchar(100) not null,
+
+questionText VARCHAR(255) not null,
+
+optionA VARCHAR(100) not null,
+
+optionB VARCHAR(100) not null,
+
+optionC VARCHAR(100) not null,
+
+optionD VARCHAR(100) not null,
+
+correctOption CHAR(1)not null
+
+);
+ 
+INSERT INTO question (category, questionText, optionA, optionB, optionC, optionD, correctOption) VALUES
+
+('Java', 'Which of the following is not a Java keyword?', 'class', 'interface', 'goto', 'printf', 'D'),
+
+('Java', 'What is the default value of a boolean variable?', 'true', 'false', 'null', '0', 'B'),
+
+('SQL', 'Which SQL statement is used to extract data?', 'GET', 'SELECT', 'EXTRACT', 'FETCH', 'B'),
+
+('HTML', 'What does HTML stand for?', 'Hyper Trainer Marking Language', 'Hyper Text Markup Language', 'Hyper Text Marketing Language', 'None', 'B'),
+
+('CSS', 'Which property is used to change text color?', 'font-color', 'text-color', 'color', 'background-color', 'C'),
+
+('Spring Boot', 'Which annotation marks a Spring Boot Application?', '@Configuration', '@SpringBootApplication', '@EnableAutoConfiguration', '@ComponentScan', 'B');
+ 
+select * from question;
+ 
+CREATE TABLE user (
+
+id INT PRIMARY KEY AUTO_INCREMENT,
+
+username VARCHAR(50) UNIQUE,
+
+password VARCHAR(50)
+
+);
+ 
+INSERT INTO user (username, password) VALUES
+
+('john_doe', 'password123'),
+
+('alice_smith', 'alice@2024'),
+
+('bob_jones', 'bobsecure'),
+
+('charan', 'charan321');
+ 
+select * from user;
+ 
+CREATE TABLE quiz (
+
+    id INT AUTO_INCREMENT PRIMARY KEY,
+
+    name VARCHAR(255) NOT NULL,
+
+    category VARCHAR(100) NOT NULL
+
+);
+
+select * from quiz;
+ 
+CREATE TABLE quiz_question (
+
+    quiz_id INT,
+
+    question_id INT,
+
+    PRIMARY KEY (quiz_id, question_id),
+
+    FOREIGN KEY (quiz_id) REFERENCES quiz(id),
+
+    FOREIGN KEY (question_id) REFERENCES question(id)
+
+);
+
+select * from quiz;
+ 
+select * from quiz_question;
+ 
+select * from result;
+
+CREATE TABLE result (
+
+id INT PRIMARY KEY AUTO_INCREMENT,
+
+user_id INT,
+
+quiz_id INT,
+
+score INT,
+
+FOREIGN KEY (user_id) REFERENCES user(id),
+
+FOREIGN KEY (quiz_id) REFERENCES quiz(id)
+
+);
+ 
